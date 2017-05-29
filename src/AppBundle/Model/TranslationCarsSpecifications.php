@@ -1,4 +1,4 @@
-?php
+<?php
 namespace AppBundle\Model;
 
 
@@ -20,16 +20,17 @@ class TranslationCarsSpecifications
         if(strlen($plainModel) != 6)
             throw new Exception('Plainmodel lenght != 5',2);
 
-        $model = substr($this->plainModel,3);
-        $wersjaWyposazenia = substr($this->plainModel, 3,1);
-        $silnik = substr($this->plainModel,4,1);
-        $skrzyniaBiegow = substr($this->plainModel, -1);
+        $model = substr($plainModel,0,3);
+        $wersjaWyposazenia = substr($plainModel, 3,1);
+        $silnik = substr($plainModel,4,1);
+        $skrzyniaBiegow = substr($plainModel, -1);
+
 
         $return = array();
         $return['model'] = $this->translatePlainModel($model);
-        $return['wersjaWyposazenia'] = $this->translateWersjaWyposazenia();
-        $return['silnik'] = $this->translateSilnik();
-        $return['skrzyniaBiegow'] = $this->translateSkrzyniaBiegow();
+        $return['wersjaWyposazenia'] = $this->translatePlainWersjaWyposazenia($wersjaWyposazenia);
+        $return['silnik'] = $this->translatePlainSilnik($silnik);
+        $return['skrzyniaBiegow'] = $this->translatePlainSkrzyniaBiegow($skrzyniaBiegow);
         return $return;
     }
     public function translateIFA($IFA){
@@ -39,7 +40,7 @@ class TranslationCarsSpecifications
         if(strlen($IFA) < 2)
             throw new Exception('IFA lenght < 2',2);
 
-        $dataProdukcji = substr($IFA,2);
+        $dataProdukcji = substr($IFA,0, 2);
 
         return $dataProdukcji+1;
     }
@@ -451,43 +452,43 @@ class TranslationCarsSpecifications
     private function translatePlainKolor($kolor)
     {
         switch ($kolor){
-            case "1Z1Z":
+            case "1Z":
                 return "czarny";
                 break;
-            case "2C2C":
+            case "2C":
                 return "szary";
                 break;
-            case "3K3K":
+            case "3K":
                 return "biały-mint";
                 break;
-            case "4K4K":
+            case "4K":
                 return "JASNO-BRĄZOWY";
                 break;
-            case "8E8E":
+            case "8E":
                 return "srebrny";
                 break;
-            case "8T8T":
+            case "8T":
                 return "czerwony";
                 break;
-            case "8X8X":
-                return "NIEBIESKI";
+            case "8X":
+                return "NIEBIESKI RACE";
                 break;
-            case "9P9P":
+            case "9P":
                 return "biały";
                 break;
-            case "B4B4":
+            case "B4":
                 return "biały";
                 break;
-            case "F6F6":
+            case "F6":
                 return "szary";
                 break;
-            case "G0G0":
+            case "G0":
                 return "zółty";
                 break;
-            case "G2G2":
+            case "G2":
                 return "czerowny";
                 break;
-            case "Z5Z5":
+            case "Z5":
                 return "niebieski";
                 break;
             default:
@@ -663,25 +664,25 @@ class TranslationCarsSpecifications
         switch ($skrzyniaBiegow)
         {
             case "Y":
-                return "Skrzynia biegów  1 ";
+                return "Skrzynia biegów opcja 1 ";
                 break;
             case "5":
-                return "Skrzynia biegów  2 ";
+                return "Skrzynia biegów opcja 2 ";
                 break;
             case "C":
-                return "Skrzynia biegów  3 ";
+                return "Skrzynia biegów opcja 3 ";
                 break;
             case "X":
-                return "Skrzynia biegów  4 ";
+                return "Skrzynia biegów opcja 4 ";
                 break;
             case "D":
-                return "Skrzynia biegów  5 ";
+                return "Skrzynia biegów opcja 5 ";
                 break;
             case "1":
-                 return "Skrzynia biegów  6 ";
+                 return "Skrzynia biegów opcja 6 ";
                  break;
             case "4":
-                 return "Skrzynia biegów  7 ";
+                 return "Skrzynia biegów opcja 7 ";
                  break;
 
 

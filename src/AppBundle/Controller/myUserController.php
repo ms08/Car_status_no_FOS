@@ -5,12 +5,12 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
 use Symfony\Component\HttpFoundation\Session\Session;
+use AppBundle\Model\MyUser;
+use AppBundle\Model\TranslationCarsSpecifications;
 
 class myUserController extends Controller
 {
@@ -18,40 +18,57 @@ class myUserController extends Controller
     /**
      * @Route("/user/login", name="userLogin")
      */
-    public function loginUserAction(Request $request){
+    public function loginUserAction(Request $request)
+    {
         $form = $this->createFormBuilder(array())
-            ->add('kom',IntegerType::class)
-            ->add('name',TextType::class)
-            ->add('login',SubmitType::class,array('label'=>'Zaloguj'))
+            ->add('kom', IntegerType::class)
+            ->add('name', TextType::class)
+            ->add('login', SubmitType::class, array('label' => 'Zaloguj'))
             ->getForm();
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
 
             $car = $repository->findOneBy(array('klient' => $data['name'], 'kom' => $data['kom']));
-            if(empty($car)){
-                return $this->render('AppBundle:myUser:login_user.html.twig',array('form' => $form->createView()));
-            }
-            else { //zaloguj
+            if (empty($car)) {
+                return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
+            } else { //zaloguj
                 $session = new Session();
-                $session->set('userID',$car->getID());
-                return $this->redirectToRoute('app_myuser_showonecar');
+                $session->set('userID', $car->getID());
+                return $this->redirectToRoute('showOneCar');
             }
         }
 
-        return $this->render('AppBundle:myUser:login_user.html.twig',array('form' => $form->createView()));
+        return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
     }
+
     /**
-     * @Route("/user/showOneCar")
+     * @Route("/user/showOneCar", name="showOneCar")
      */
     public function showOneCarAction()
     {
-        return $this->render('AppBundle:myUser:show_one_car.html.twig', array(
-            // ...
-        ));
+
+        $session = new Session();
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
+
+        if (!MyUser::isMyUserLogged($session, $repository))
+            return $this->redirectToRoute('userLogin');
+
+        $translatedArr = array();
+        $translator = new TranslationCarsSpecifications();
+        $car = $repository->findOneById(MyUser::getMyUserID($session));
+
+        $translatedArr['kolor'] = $translator->translateKolor($car->getKolor());
+        $translatedArr['model'] = $translator->translateModel($car->getModel());
+        $translatedArr['pakiety'] = $translator->translatePakiety($car->getPakiety());
+        $translatedArr['ifa'] = $translator->translateIFA($car->getIFA());
+        $translatedArr['wnetrze'] = $translator->translateWnetrze($car->getWnetrze());
+
+        return $this->render('AppBundle:myUser:show_one_car.html.twig',
+            array('car'=>$car, 'carTranslated' => $translatedArr));
     }
 
     /**
@@ -59,8 +76,9 @@ class myUserController extends Controller
      */
     public function showAllCarsAction()
     {
-        return $this->render('AppBundle:myUser:show_all_cars.html.twig', array(
-            // ...
+
+
+        return $this->render('AppBundle:myUser:show_all_cars.html.twig', array(// ...
         ));
     }
 
@@ -69,9 +87,20 @@ class myUserController extends Controller
      */
     public function mainAction()
     {
-        return $this->render('AppBundle:myUser:main.html.twig', array(
-            // ...
+        return $this->render('AppBundle:myUser:main.html.twig', array(// ...
         ));
+    }
+
+
+    /**
+     * @Route("/user/logout", name="userLogout")
+     */
+
+    public function logoutUserAction(Request $request)
+    {
+        $session = new Session();
+        $session->remove('userID');
+        return $this->redirectToRoute('userLogin');
     }
 
 }
