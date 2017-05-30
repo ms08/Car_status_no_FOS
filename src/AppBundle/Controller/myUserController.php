@@ -83,12 +83,27 @@ class myUserController extends Controller
     }
 
     /**
-     * @Route("/user/main")
+     * @Route("/user/main", name="userMain")
      */
     public function mainAction()
     {
-        return $this->render('AppBundle:myUser:main.html.twig', array(// ...
-        ));
+        $session = new Session();
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
+
+        if (!MyUser::isMyUserLogged($session, $repository))
+            return $this->redirectToRoute('userLogin');
+
+        $translatedArr = array();
+        $translator = new TranslationCarsSpecifications();
+        $car = $repository->findOneById(MyUser::getMyUserID($session));
+
+        $translatedArr['kolor'] = $translator->translateKolor($car->getKolor());
+        $translatedArr['model'] = $translator->translateModel($car->getModel());
+        $translatedArr['pakiety'] = $translator->translatePakiety($car->getPakiety());
+        $translatedArr['ifa'] = $translator->translateIFA($car->getIFA());
+        $translatedArr['wnetrze'] = $translator->translateWnetrze($car->getWnetrze());
+
+        return $this->render('AppBundle:myUser:main.html.twig', array('car'=>$car, 'carTranslated' => $translatedArr));
     }
 
 

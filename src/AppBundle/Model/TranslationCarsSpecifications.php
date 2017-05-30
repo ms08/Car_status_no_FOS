@@ -35,7 +35,7 @@ class TranslationCarsSpecifications
     }
     public function translateIFA($IFA){
         if(empty($IFA))
-            throw new Exception('Empty IFA',1);
+            return;
 
         if(strlen($IFA) < 2)
             throw new Exception('IFA lenght < 2',2);

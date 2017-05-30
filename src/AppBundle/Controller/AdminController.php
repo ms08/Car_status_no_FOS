@@ -213,6 +213,8 @@ class AdminController extends Controller
 
     public function allCarsAdminAction()
     {
-        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array());
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
+        $car = $repository->findAll();
+        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array('car'=>$car));
     }
 }
