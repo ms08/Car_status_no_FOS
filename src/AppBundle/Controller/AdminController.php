@@ -206,4 +206,13 @@ class AdminController extends Controller
         $session->remove('adminID');
         return $this->redirectToRoute('adminLogin');
     }
+
+    /**
+     * @Route("/admin/allCars", name="adminAllCars")
+     */
+
+    public function allCarsAdminAction()
+    {
+        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array());
+    }
 }

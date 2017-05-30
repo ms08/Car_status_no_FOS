@@ -3,61 +3,65 @@
 {% block title %}Twój samochód {% endblock %}
 
 {% block body %}
-    <h1>
-        {% if car.klient|split(' ')[0]|last == "a" %}
-            Pani
-        {% else %}
-            Pan
-        {% endif %} : {{ car.klient }}
-    </h1>
-
-    {#{{  car.kom }}#}
-    {#{{ car.model }}#}
-    {#{{ car.kolor }}#}
-    {#{{ car.wnetrze }}#}
-    {#{{ car.IFA }}#}
 
 
-    {#MODEL: {{ carTranslated.model.model }}#}
-    {#WERSJA WYPOSAŻENIA: {{ carTranslated.model.wersjaWyposazenia }}#}
-    {#SILNIK: {{ carTranslated.model.silnik }}#}
-    {#SKRZYNIA BIEGÓW: {{ carTranslated.model.skrzyniaBiegow }}#}
-    {#TERMIN PRODUKCJI: {{ carTranslated.ifa }} Tydzień roku#}
-    {#KOLOR DACHU: {{ carTranslated.kolor.kolorDachu }}#}
-    {#KOLOR Nadwozia: {{ carTranslated.kolor.kolorNadwozia }}#}
-    {#WNĘRTTRZE: {{ carTranslated.wnetrze }}#}
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+        <a class="navbar-brand" href="#">Strona glówna</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">
+                        {% if car.klient|split(' ')[0]|last == "a" %}
+                            Pani
+                        {% else %}
+                            Pan
+                        {% endif %}  {{ car.klient }} <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <a href="{{ path('userLogout') }}">Wyloguj się</a>
+            </div>
+        </div>
+    </nav>
+
+    </br>
+    </br>
+
+
     <div class="row">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Model</th>
-                    <th>Wersja Wyposażenia</th>
-                    <th>Silnik</th>
-                    <th>Skrzynia biegów</th>
-                    <th>Kolor nadwozia</th>
-                    <th>Kolor dachu</th>
-                    <th>Kolor wnętrza</th>
-                    <th>Termin Produkcji</th>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Model</th>
+                <th>Wersja Wyposażenia</th>
+                <th>Silnik</th>
+                <th>Skrzynia biegów</th>
+                <th>Kolor nadwozia</th>
+                <th>Kolor dachu</th>
+                <th>Kolor wnętrza</th>
+                <th>Termin Produkcji</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ carTranslated.model.model }}</td>
+                <td>{{ carTranslated.model.wersjaWyposazenia }}</td>
+                <td>{{ carTranslated.model.silnik }}</td>
+                <td>{{ carTranslated.model.skrzyniaBiegow }}</td>
+                <td>{{ carTranslated.kolor.kolorNadwozia }}</td>
+                <td>{{ carTranslated.kolor.kolorDachu }}</td>
+                <td>{{ carTranslated.wnetrze }}</td>
+                <td>{{ carTranslated.ifa }} Tydzień roku</td>
+            </tr>
 
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-
-                    <td>{{ carTranslated.model.model }}</td>
-                    <td>{{ carTranslated.model.wersjaWyposazenia }}</td>
-                    <td>{{ carTranslated.model.silnik }}</td>
-                    <td>{{ carTranslated.model.skrzyniaBiegow }}</td>
-                    <td>{{ carTranslated.kolor.kolorNadwozia }}</td>
-                    <td>{{ carTranslated.kolor.kolorDachu }}</td>
-                    <td>{{ carTranslated.wnetrze }}</td>
-                    <td>{{ carTranslated.ifa }} Tydzień roku</td>
-
-
-                </tr>
-
-                </tbody>
-            </table>
+            </tbody>
+        </table>
     </div>
     <div class="row">
         <div id="pakiety">
@@ -69,9 +73,4 @@
         </div>
     </div>
 
-
-
-
-
-    <a href="{{ path('userLogout') }}">Wyloguj się</a>
 {% endblock %}
