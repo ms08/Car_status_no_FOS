@@ -21,8 +21,8 @@ class myUserController extends Controller
     public function loginUserAction(Request $request)
     {
         $form = $this->createFormBuilder(array())
-            ->add('kom', IntegerType::class)
-            ->add('name', TextType::class)
+            ->add('Nr_identyfikacyjny', IntegerType::class)
+            ->add('Imie_i_nazwisko', TextType::class)
             ->add('login', SubmitType::class, array('label' => 'Zaloguj'))
             ->getForm();
 
@@ -32,7 +32,7 @@ class myUserController extends Controller
             $data = $form->getData();
             $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
 
-            $car = $repository->findOneBy(array('klient' => $data['name'], 'kom' => $data['kom']));
+            $car = $repository->findOneBy(array('klient' => $data['Imie_i_nazwisko'], 'kom' => $data['Nr_identyfikacyjny']));
             if (empty($car)) {
                 return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
             } else { //zaloguj
