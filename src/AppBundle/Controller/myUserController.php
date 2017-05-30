@@ -35,9 +35,14 @@ class myUserController extends Controller
             $car = $repository->findOneBy(array('klient' => $data['Imie_i_nazwisko'], 'kom' => $data['Nr_identyfikacyjny']));
             if (empty($car)) {
                 return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
-            } else { //zaloguj
-                $session = new Session();
-                $session->set('userID', $car->getID());
+            } else { //zalogowano
+                $usersLastLogin = MyUser::userLogin(new Session(),$car);
+
+                $this->getDoctrine()->getManager()->persist($usersLastLogin);
+                $this->getDoctrine()->getManager()->flush();
+
+                //$this->getDoctrine()->flush();
+
                 return $this->redirectToRoute('showOneCar');
             }
         }
@@ -117,5 +122,16 @@ class myUserController extends Controller
         $session->remove('userID');
         return $this->redirectToRoute('userLogin');
     }
+
+    /**
+     * @Route("/user/sendMessage", name="userSendMessage")
+     */
+
+    public function userSendMessageAction(Request $request)
+    {
+        return $this->render('AppBundle:myUser:send_message.html.twig', array());
+    }
+
+
 
 }

@@ -5,30 +5,7 @@
 {% block body %}
 
 
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
 
-        <a class="navbar-brand" href="#">Strona glówna</a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('userMain') }}">
-                        {% if car.klient|split(' ')[0]|last == "a" %}
-                            Pani
-                        {% else %}
-                            Pan
-                        {% endif %}  {{ car.klient }} <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
-                </li>
-
-            </ul>
-            <div class="form-inline my-2 my-lg-0">
-                <a href="{{ path('userLogout') }}">Wyloguj się</a>
-            </div>
-        </div>
-    </nav>
 
     </br>
     </br>

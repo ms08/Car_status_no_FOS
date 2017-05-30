@@ -109,5 +109,20 @@ class UsersAdmin
     {
         return $this->id;
     }
-}
 
+    public static function isAdminLogged($session, $db){
+        $id = $session->get('adminID');
+        if(empty($id))
+            return false;
+
+        $admin = $db->findOneById($id);
+
+        if(empty($admin))
+            return false;
+
+        return true;
+    }
+    public static function getSaltedPassword($plainPass, $salt){
+        return hash('sha256',$plainPass.$salt);
+    }
+}

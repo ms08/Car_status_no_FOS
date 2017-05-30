@@ -3,18 +3,23 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Cars
  *
- * @ORM\Table(name="cars")
+ * @ORM\Table(name="cars", uniqueConstraints={@ORM\UniqueConstraint(name="Kom", columns={"Kom"})})
  * @ORM\Entity
  */
 class Cars
 {
     /**
+     * @ORM\OneToMany(targetEntity="UsersLastLogin", mappedBy="last_login")
+     */
+    private $lastLogin;
+
+    /**
      * @var integer
-     *
      * @ORM\Column(name="Kom", type="integer", nullable=false)
      */
     private $kom;
@@ -281,7 +286,9 @@ class Cars
     private $id;
 
 
-
+    public function __construct(){
+        $this->lastLogin = new ArrayCollection();
+    }
     /**
      * Set kom
      *

@@ -215,6 +215,15 @@ class AdminController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
         $car = $repository->findAll();
+        dump($car[0]);
         return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array('car'=>$car));
+    }
+
+    /**
+     * @Route("/admin/oneCar/{kom}", name="adminOneCar")
+     */
+    public function oneCarAction($kom)
+    {
+        return $this->render('AppBundle:Admin:admin_one_car.html.twig',array());
     }
 }

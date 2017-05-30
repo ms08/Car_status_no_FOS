@@ -9,11 +9,40 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
-Tu zrobić navbara aby dziedziczył do innych klas base.html.twig
 <div class="container">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+
+    <a class="navbar-brand" href="#">Strona glówna</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {%  if car.klient is defined %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('userMain') }}">
+                    {% if car.klient|split(' ')[0]|last == "a" %}
+                        Pani
+                    {% else %}
+                        Pan
+                    {% endif %}  {{ car.klient }} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('userSendMessage') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+
+        </ul>
+        {%  if car.klient is defined %}
+        <div class="form-inline my-2 my-lg-0">
+            <a href="{{ path('userLogout') }}">Wyloguj się</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
+
 {% block body %}
 
 {% endblock %}
@@ -21,8 +50,23 @@ Tu zrobić navbara aby dziedziczył do innych klas base.html.twig
 {% block javascripts %}{% endblock %}
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#example').DataTable( {
+            "pagingType": "full_numbers"
+        } );
+    } );
+</script>
 </body>
 </html>
