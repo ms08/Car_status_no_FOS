@@ -13,10 +13,42 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Cars
 {
+    private $usersLastLogin;
+
     /**
-     * @ORM\OneToMany(targetEntity="UsersLastLogin", mappedBy="last_login")
+     * @return mixed
      */
+    public function getUsersLastLogin()
+    {
+        return $this->usersLastLogin;
+    }
+
+    /**
+     * @param mixed $usersLastLogin
+     */
+    public function setUsersLastLogin($usersLastLogin)
+    {
+        $this->usersLastLogin = $usersLastLogin;
+    }
+
     private $lastLogin;
+
+    /**
+     * @return mixed
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @param mixed $lastLogin
+     */
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
 
     /**
      * @var integer
@@ -287,7 +319,7 @@ class Cars
 
 
     public function __construct(){
-        $this->lastLogin = new ArrayCollection();
+        $this->usersLastLogin = new ArrayCollection();
     }
     /**
      * Set kom

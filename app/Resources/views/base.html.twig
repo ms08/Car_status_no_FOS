@@ -33,6 +33,12 @@
                 <a class="nav-link" href="{{ path('userSendMessage') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
             </li>
             {% endif %}
+            {%  if adminID is defined and adminID is not empty  %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('adminAllCars') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
+                </li>
+
+            {% endif %}
 
         </ul>
         {%  if car.klient is defined %}
@@ -64,7 +70,10 @@
 <script>
     jQuery(document).ready(function() {
         jQuery('#example').DataTable( {
-            "pagingType": "full_numbers"
+            "pagingType": "full_numbers",
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+            }
         } );
     } );
 </script>

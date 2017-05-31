@@ -7,15 +7,6 @@ namespace AppBundle\Entity;
  */
 class UsersLastLogin
 {
-    /**
-     * @var integer
-     */
-    private $kom;
-
-    /**
-     * @var string
-     */
-    private $klient;
 
     /**
      * @var \DateTime
@@ -27,54 +18,11 @@ class UsersLastLogin
      */
     private $id;
 
-
     /**
-     * Set kom
-     *
-     * @param integer $kom
-     *
-     * @return UsersLastLogin
+     * @var \AppBundle\Entity\Cars
      */
-    public function setKom($kom)
-    {
-        $this->kom = $kom;
+    private $kom;
 
-        return $this;
-    }
-
-    /**
-     * Get kom
-     *
-     * @return integer
-     */
-    public function getKom()
-    {
-        return $this->kom;
-    }
-
-    /**
-     * Set klient
-     *
-     * @param string $klient
-     *
-     * @return UsersLastLogin
-     */
-    public function setKlient($klient)
-    {
-        $this->klient = $klient;
-
-        return $this;
-    }
-
-    /**
-     * Get klient
-     *
-     * @return string
-     */
-    public function getKlient()
-    {
-        return $this->klient;
-    }
 
     /**
      * Set lastLogin
@@ -109,5 +57,28 @@ class UsersLastLogin
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set kom
+     *
+     * @param \AppBundle\Entity\Cars $kom
+     *
+     * @return UsersLastLogin
+     */
+    public function setKom(\AppBundle\Entity\Cars $kom = null)
+    {
+        $this->kom = $kom;
+
+        return $this;
+    }
+
+    /**
+     * Get kom
+     *
+     * @return \AppBundle\Entity\Cars
+     */
+    public function getKom()
+    {
+        return $this->kom;
+    }
+}

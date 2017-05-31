@@ -122,7 +122,14 @@ class UsersAdmin
 
         return true;
     }
+    public static function getAdminLoggedID($session){
+        $id = $session->get('adminID');
+        return $id;
+    }
     public static function getSaltedPassword($plainPass, $salt){
         return hash('sha256',$plainPass.$salt);
+    }
+    public static function generateRandomSalt(){
+        return uniqid(mt_rand(), true);
     }
 }

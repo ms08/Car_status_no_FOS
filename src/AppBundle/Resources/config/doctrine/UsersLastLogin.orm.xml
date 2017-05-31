@@ -7,11 +7,11 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="kom" type="integer" column="kom" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <field name="lastLogin" type="datetime" column="last_login" nullable="false"/>
-    <many-to-one field="kom" target-entity="Cars" fetch="LAZY">
-      <join-columns>
-        <join-column name="kom" referenced-column-name="Kom"/>
-      </join-columns>
-    </many-to-one>
   </entity>
 </doctrine-mapping>

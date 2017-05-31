@@ -213,10 +213,21 @@ class AdminController extends Controller
 
     public function allCarsAdminAction()
     {
+        $session = new Session();
+        //relacja?!
+        $repository2 = $this->getDoctrine()->getRepository('AppBundle:UsersAdmin');
+        if(!UsersAdmin::isAdminLogged($session,$repository2))
+            return $this->redirectToRoute('adminLogin');
+
+        //$repositoryLastLogin = $this->getDoctrine()->getRepository('AppBundle:UsersLastLogin');
         $repository = $this->getDoctrine()->getRepository('AppBundle:Cars');
-        $car = $repository->findAll();
-        dump($car[0]);
-        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array('car'=>$car));
+        $cars = $repository->findAll();
+        /*
+        foreach($cars as $car){
+            $car->setUsersLastLogin($repositoryLastLogin->findByKom($car->getKom()));
+            $car->setLastLogin($car->getUsersLastLogin()[0]->getLastLogin()->format("Y-m-d H:i:s"));
+        }*/
+        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array('car'=>$cars,'adminID'=>UsersAdmin::getAdminLoggedID($session)));
     }
 
     /**
@@ -225,5 +236,47 @@ class AdminController extends Controller
     public function oneCarAction($kom)
     {
         return $this->render('AppBundle:Admin:admin_one_car.html.twig',array());
+    }
+
+    /**
+     * @Route("/admin/register", name="adminRegister")
+     */
+    public function adminRegisterAction(Request $request)
+    {
+
+        $form = $this->createFormBuilder(array())
+            ->add('email', TextType::class)
+            ->add('pass', PasswordType::class)
+            ->add('pass2', PasswordType::class)
+            ->add('login', SubmitType::class, array('label' => 'Zarejestruj'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $repository = $this->getDoctrine()->getRepository('AppBundle:UsersAdmin');
+
+            $userAdmin = $repository->findOneByEmail($data['email']);
+            if (empty($userAdmin)) {
+                if($data['pass'] != $data['pass2']){
+                    ///hasło nieprawidłowe
+                    return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
+                }
+                $salt = UsersAdmin::generateRandomSalt();
+                $userAdmin = new UsersAdmin();
+                $userAdmin->setEmail($data['email']);
+                $userAdmin->setSalt($salt);
+                $userAdmin->setPass(UsersAdmin::getSaltedPassword($data['pass'], $salt));
+                $this->getDoctrine()->getManager()->persist($userAdmin);
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('adminLogin');
+
+            } else { //taki user istnieje
+                return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
+            }
+        }
+
+        return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
     }
 }
