@@ -1,43 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    </br>
 
     <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-            <th>Salary</th>
-            <th>Salary</th>
+            <th>Komisja</th>
+            <th>Rok Modelowy</th>
+            <th>Model</th>
+            <th>Kolor</th>
+            <th>Wnetrze</th>
+            <th>Klient</th>
+            <th>Dyspozycja na Dealera</th>
+            <th>Data zamowienia</th>
+            <th>Termin produkcji IFA</th>
+            <th>Oznaczenie_wyboru</th>
+
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-            <th>Salary</th>
-            <th>Salary</th>
+            <th>Komisja</th>
+            <th>Rok Modelowy</th>
+            <th>Model</th>
+            <th>Kolor</th>
+            <th>Wnetrze</th>
+            <th>Klient</th>
+            <th>Dyspozycja na Dealera</th>
+            <th>Data zamowienia</th>
+            <th>Termin produkcji IFA</th>
+            <th>Oznaczenie_wyboru</th>
         </tr>
         </tfoot>
         <tbody>
         {% for i in car %}
             <tr>
-                <td> <a href="{{ path('adminOneCar',{'kom':i.kom}) }}"> {{ i.model }}</a></td>
-                <td>{{ i.last_login }}</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-                <td>$320,800</td>
-                <td>$320,800</td>
+                <td> <a href="{{ path('adminOneCar',{'kom':i.kom}) }}"> {{ i.kom }}</a></td>
+                <td>{{ i.rm }}</td>
+                <td>{{ i.model }}</td>
+                <td>{{ i.kolor }}</td>
+                <td>{{ i.wnetrze }}</td>
+                <td>{{ i.klient }}</td>
+                <td>{{ i.dyspozycjanadealera }}</td>
+                <td>{{ i.dataZamowienia }}</td>
+                <td>{{ i.terminprodukcji }}</td>
+                <td>{{ i.oznaczeniewyboru }}</td>
             </tr>
             {% endfor %}
         </tbody>
