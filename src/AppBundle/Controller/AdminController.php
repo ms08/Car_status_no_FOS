@@ -2,14 +2,13 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -128,7 +127,7 @@ class AdminController extends Controller
     {
         $session = new Session();
         $repository = $this->getDoctrine()->getRepository('AppBundle:UsersAdmin');
-        if(!UsersAdmin::isAdminLogged($session,$repository))
+        if (!UsersAdmin::isAdminLogged($session, $repository))
             return $this->redirectToRoute('adminLogin');
 
         $data = [];
@@ -163,36 +162,34 @@ class AdminController extends Controller
     public function loginAdminAction(Request $request)
     {
         $form = $this->createFormBuilder(array())
-            ->add('email',TextType::class)
-            ->add('password',PasswordType::class)
-            ->add('login',SubmitType::class)
+            ->add('email', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('login', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $repository = $this->getDoctrine()->getRepository('AppBundle:UsersAdmin');
-            $admin = $repository->findOneBy(array('email'=>$data['email']));
-            if(empty($admin)){
-                return $this->render('AppBundle:myUser:login_user.html.twig',array('form' => $form->createView()));
-            }
-            else { // nie ma takiego usera
+            $admin = $repository->findOneBy(array('email' => $data['email']));
+            if (empty($admin)) {
+                return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
+            } else { // nie ma takiego usera
                 $saltedPassword = UsersAdmin::getSaltedPassword($data['password'], $admin->getSalt());
 
-                if($saltedPassword === $admin->getPass()){
+                if ($saltedPassword === $admin->getPass()) {
                     //zaloguj
                     $session = new Session();
-                    $session->set('adminID',$admin->getID());
+                    $session->set('adminID', $admin->getID());
                     return $this->redirectToRoute('adminAllCars');
-                }
-                else {
+                } else {
                     //blad bledne haslo
                 }
             }
         }
 
-        return $this->render('AppBundle:myUser:login_user.html.twig',array('form' => $form->createView()));
+        return $this->render('AppBundle:myUser:login_user.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -215,7 +212,7 @@ class AdminController extends Controller
         $session = new Session();
         //relacja?!
         $repository2 = $this->getDoctrine()->getRepository('AppBundle:UsersAdmin');
-        if(!UsersAdmin::isAdminLogged($session,$repository2))
+        if (!UsersAdmin::isAdminLogged($session, $repository2))
             return $this->redirectToRoute('adminLogin');
 
         //$repositoryLastLogin = $this->getDoctrine()->getRepository('AppBundle:UsersLastLogin');
@@ -226,7 +223,7 @@ class AdminController extends Controller
             $car->setUsersLastLogin($repositoryLastLogin->findByKom($car->getKom()));
             $car->setLastLogin($car->getUsersLastLogin()[0]->getLastLogin()->format("Y-m-d H:i:s"));
         }*/
-        return $this->render('AppBundle:Admin:admin_all_cars.html.twig',array('car'=>$cars,'adminID'=>UsersAdmin::getAdminLoggedID($session)));
+        return $this->render('AppBundle:Admin:admin_all_cars.html.twig', array('car' => $cars, 'adminID' => UsersAdmin::getAdminLoggedID($session)));
     }
 
     /**
@@ -234,7 +231,7 @@ class AdminController extends Controller
      */
     public function oneCarAction($kom)
     {
-        return $this->render('AppBundle:Admin:admin_one_car.html.twig',array());
+        return $this->render('AppBundle:Admin:admin_one_car.html.twig', array());
     }
 
     /**
@@ -258,9 +255,9 @@ class AdminController extends Controller
 
             $userAdmin = $repository->findOneByEmail($data['email']);
             if (empty($userAdmin)) {
-                if($data['pass'] != $data['pass2']){
+                if ($data['pass'] != $data['pass2']) {
                     ///hasło nieprawidłowe
-                    return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
+                    return $this->render('AppBundle:Admin:admin_register.html.twig', array('form' => $form->createView()));
                 }
                 $salt = UsersAdmin::generateRandomSalt();
                 $userAdmin = new UsersAdmin();
@@ -272,10 +269,10 @@ class AdminController extends Controller
                 return $this->redirectToRoute('adminLogin');
 
             } else { //taki user istnieje
-                return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
+                return $this->render('AppBundle:Admin:admin_register.html.twig', array('form' => $form->createView()));
             }
         }
 
-        return $this->render('AppBundle:Admin:admin_register.html.twig',array('form'=>$form->createView()));
+        return $this->render('AppBundle:Admin:admin_register.html.twig', array('form' => $form->createView()));
     }
 }
