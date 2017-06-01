@@ -8,50 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
 
-    <a class="navbar-brand" href="#">Strona glówna</a>
+        <a class="navbar-brand" href="http://www.google.pl">Strona glówna</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {%  if car.klient is defined %}
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('userMain') }}">
-                    {% if car.klient|split(' ')[0]|last == "a" %}
-                        Pani
-                    {% else %}
-                        Pan
-                    {% endif %}  {{ car.klient }} <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('userSendMessage') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if car.klient is defined %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('userMain') }}">
+                            {% if car.klient|split(' ')[0]|last == "a" %}
+                                Pani
+                            {% else %}
+                                Pan
+                            {% endif %}  {{ car.klient }} <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('userSendMessage') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
+                {% if adminID is defined and adminID is not empty %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('adminAddTable') }}">Dodaj tabele<span class="sr-only">(current)</span></a>
+                    </li>
+            </ul>
+                    <div class="form-inline my-2 my-lg-0">
+                        <a href="{{ path('adminLogout') }}">Wyloguj się</a>
+                    </div>
+                {% endif %}
+            {% if car.klient is defined %}
+                <div class="form-inline my-2 my-lg-0">
+                    <a href="{{ path('userLogout') }}">Wyloguj się</a>
+                </div>
             {% endif %}
-            {%  if adminID is defined and adminID is not empty  %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('adminAllCars') }}">Wyslij wiadomosc<span class="sr-only">(current)</span></a>
-                </li>
-
-            {% endif %}
-
-        </ul>
-        {%  if car.klient is defined %}
-        <div class="form-inline my-2 my-lg-0">
-            <a href="{{ path('userLogout') }}">Wyloguj się</a>
         </div>
-        {% endif %}
-    </div>
-</nav>
+    </nav>
 
-{% block body %}
+    {% block body %}
 
-{% endblock %}
+    {% endblock %}
 </div>
 {% block javascripts %}{% endblock %}
 
@@ -64,18 +66,21 @@
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
 <script>
-    jQuery(document).ready(function() {
-        jQuery('#example').DataTable( {
+    jQuery(document).ready(function () {
+        jQuery('#example').DataTable({
             "pagingType": "full_numbers",
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
             }
-        } );
-    } );
+        });
+    });
 </script>
 </body>
 </html>

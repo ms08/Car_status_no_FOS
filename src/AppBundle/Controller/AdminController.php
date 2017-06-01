@@ -177,15 +177,14 @@ class AdminController extends Controller
             if(empty($admin)){
                 return $this->render('AppBundle:myUser:login_user.html.twig',array('form' => $form->createView()));
             }
-            else { // nie ma takiego juzera
+            else { // nie ma takiego usera
                 $saltedPassword = UsersAdmin::getSaltedPassword($data['password'], $admin->getSalt());
 
                 if($saltedPassword === $admin->getPass()){
                     //zaloguj
                     $session = new Session();
                     $session->set('adminID',$admin->getID());
-                    return $this->redirectToRoute('adminAddTable');
-
+                    return $this->redirectToRoute('adminAllCars');
                 }
                 else {
                     //blad bledne haslo
