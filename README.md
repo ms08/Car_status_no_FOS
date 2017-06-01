@@ -30,6 +30,8 @@ Dodatkowo oprócz statusu samochodu klient ma możliwość kolejnej weryfikacji 
 Procesy
 Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostępnych w zamowieniu, loguje się do aplikacji. Po poprawnym logowaniu umożliwia podgląd produkcji -> oczywiście przetłumaczony na język zrozumiały dla użytkownika.
 
+Plik database_dump - zrzut bazy danych do importu i przetestowania funkcjonalności. 
+
 Zrzuty ekranu: 
 
 Admin:
