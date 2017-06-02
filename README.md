@@ -14,10 +14,10 @@ ___
 
 Admin:
 
-uzupełnia bazę danych - umieszczając ja w MySQL - za pomocą dodanie pliku CSV przez Aplikację. 
-Baza jest uzpupełniana każdego dnia przez pracownika stacji, przy dodaniu nowej bazy danych poprzednia zostanie usunięta (dodajemy te same dane tylko bardziej aktulane).
+uzupełnia bazę danych - umieszczając ja w MySQL - za pomocą dodania pliku CSV przez Aplikację. 
+Baza jest uzpupełniana każdego dnia przez pracownika stacji. Przy dodaniu nowej bazy danych poprzednia zostaje usunięta (dodajemy te same dane tylko bardziej aktulane).
 
-Dostęp do wszystkich danychw bazie i możliwość "błyskawicznego" ich filtrowania - (system producenta równięż to umożliwia ale działa bardzo wolno)
+Dostęp do wszystkich danych w bazie i możliwość "błyskawicznego" ich filtrowania - (system producenta równięż to umożliwia ale działa bardzo wolno)
 
 Przyszła funkcjonalnośc - możliwość sprawdzenia kiedy użytkownicy się ostatni raz logowali do aplikacji.
 
@@ -26,12 +26,12 @@ Dodanie możliwości wyszukiwania wielu samochodów dla jednego klietna.
 Klient:
 
 po zalogowaniu możliwość podglądu statusu produkcji swojego samochodu.
-Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia.Umożliwia mu to tłumaczenie które tłumaczą pakiety np. EA1 - na pakiet 1.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
+Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia. Umożliwia mu to tłumaczenie, na przykładzie - pakiet np. EA1 - na pakiet 1 - który jest już wyszczególniony w cenniku.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
 
 ___
 + Procesy:
 
-Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostępnych w zamowieniu, loguje się do aplikacji. Po poprawnym logowaniu umożliwia podgląd produkcji -> oczywiście przetłumaczony na język zrozumiały dla użytkownika.
+Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostępnych w zamowieniu, loguje się do aplikacji. Po poprawnym logowaniu aplikacja umożliwia podgląd produkcji -> oczywiście przetłumaczony na język zrozumiały dla użytkownika.
 
 Plik database_dump - zrzut bazy danych do importu i przetestowania funkcjonalności. 
 ___
