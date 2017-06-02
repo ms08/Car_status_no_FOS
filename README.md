@@ -3,13 +3,13 @@
 + Cele biznesowe:
 
 Celem aplikacji jest zautomtyzowanie sprawdzania produkcji obecnego statusu samochodu bez konieczności kontaktu z salonem samochoowym. Dzięki temu Klienci będą mogli sami sprawdzić status zamówionego pojazdu w dowolnej chwili.
-
+___
 + Głowne zadanie:
 
 odciążenie handlowców z konieczności "pamiętania" o Klientach :)
 Przekazanie użytkownikom możliowści bieżącego monitorowania samochodu w fabryce oraz kolejnych etapów produkcji. 
 
-
+___
 + Aplikaja posiada 2 widoki:
 
 Admin:
@@ -28,13 +28,13 @@ Klient:
 po zalogowaniu możliwość podglądu statusu produkcji swojego samochodu.
 Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia.Umożliwia mu to tłumaczenie które tłumaczą pakiety np. EA1 - na pakiet 1.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
 
-
+___
 + Procesy:
 
 Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostępnych w zamowieniu, loguje się do aplikacji. Po poprawnym logowaniu umożliwia podgląd produkcji -> oczywiście przetłumaczony na język zrozumiały dla użytkownika.
 
 Plik database_dump - zrzut bazy danych do importu i przetestowania funkcjonalności. 
-
+___
 + Przykładowe zrzuty ekranu: 
 
 Admin:
