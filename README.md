@@ -1,4 +1,4 @@
-Sprawdzanie statusu samochodu
+<h2>Sprawdzanie statusu samochodu</h2>
 
 + Cele biznesowe:
 
@@ -12,7 +12,7 @@ Przekazanie użytkownikom możliowści bieżącego monitorowania samochodu w fab
 
 + Aplikaja posiada 2 widoki:
 
-Admin:
+- Admin:
 
 uzupełnia bazę danych - umieszczając ja w MySQL - za pomocą dodanie pliku CSV przez Aplikację. 
 Baza jest uzpupełniana każdego dnia przez pracownika stacji, przy dodaniu nowej bazy danych poprzednia zostanie usunięta (dodajemy te same dane tylko bardziej aktulane).
@@ -23,10 +23,13 @@ Przyszła funkcjonalnośc - możliwość sprawdzenia kiedy użytkownicy się ost
 
 Dodanie możliwości wyszukiwania wielu samochodów dla jednego klietna. 
 
-Klient:
+- Klient:
 
 po zalogowaniu możliwość podglądu statusu produkcji swojego samochodu.
 Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia.Umożliwia mu to tłumaczenie które tłumaczą pakiety np. EA1 - na pakiet 1.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
+
+<hr>___</hr>
+
 
 + Procesy:
 
@@ -34,7 +37,7 @@ Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostę
 
 Plik database_dump - zrzut bazy danych do importu i przetestowania funkcjonalności. 
 
-Przykładowe zrzuty ekranu: 
++ Przykładowe zrzuty ekranu: 
 
 Admin:
 
