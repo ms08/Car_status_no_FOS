@@ -28,7 +28,8 @@ Klient:
 po zalogowaniu możliwość podglądu statusu produkcji swojego samochodu.
 Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia.Umożliwia mu to tłumaczenie które tłumaczą pakiety np. EA1 - na pakiet 1.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
 
-+ Procesy
++ Procesy:
+
 Po zamówieniu samochodu klient otrzymje zamówienie. Na podstawie danych dostępnych w zamowieniu, loguje się do aplikacji. Po poprawnym logowaniu umożliwia podgląd produkcji -> oczywiście przetłumaczony na język zrozumiały dla użytkownika.
 
 Plik database_dump - zrzut bazy danych do importu i przetestowania funkcjonalności. 
