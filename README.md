@@ -28,7 +28,7 @@ Dodanie możliwości wyszukiwania wielu samochodów dla jednego klietna.
 po zalogowaniu możliwość podglądu statusu produkcji swojego samochodu.
 Dodatkowo klient ma możliwość kolejnej weryfikacji poprawności zamówienia.Umożliwia mu to tłumaczenie które tłumaczą pakiety np. EA1 - na pakiet 1.  Opcje te są tłumaczone przy pobieraniu z tabeli MySQL.
 
-<hr>___</hr>
+<hr></hr>
 
 
 + Procesy:
