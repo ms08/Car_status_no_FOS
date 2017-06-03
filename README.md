@@ -43,6 +43,7 @@ Wszytskie samochody
 
 [![Zrzut ekranu 2017-06-01 o 21.49.32.png](https://s17.postimg.org/y8j5bpcpb/Zrzut_ekranu_2017-06-01_o_21.49.32.png)](https://postimg.org/image/doebd7wy3/)
 
+
 Klient (przetłumaczone opcje z bazy danych):
 
 [![Zrzut ekranu 2017-06-01 o 22.02.42.png](https://s3.postimg.org/889fuaelf/Zrzut_ekranu_2017-06-01_o_22.02.42.png)](https://postimg.org/image/889fuaelb/)
