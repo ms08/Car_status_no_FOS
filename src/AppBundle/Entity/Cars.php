@@ -1218,6 +1218,4 @@ class Cars
     {
         return $this->id;
     }
-
-    
 }
